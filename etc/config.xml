@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <naranja_webcheckout>
+                <active>1</active>
+                <title>Naranja</title>
+                <order_status>pending_payment</order_status>
+                <instructions></instructions>
+                <payment_action>authorize</payment_action>
+                <model>Watts25\Naranja\Model\WebCheckout\Payment</model>
+                <group>offline</group>
+            </naranja_webcheckout>
+        </payment>
+    </default>
+</config>
