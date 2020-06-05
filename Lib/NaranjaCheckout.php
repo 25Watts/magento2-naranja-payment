@@ -2,8 +2,6 @@
 
 namespace Watts25\Naranja\Lib;
 
-require_once('lib/internal/Naranja/vendor/autoload.php');
-
 use Exception;
 
 class NaranjaCheckout
