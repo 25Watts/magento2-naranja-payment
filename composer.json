@@ -7,6 +7,9 @@
         "OSL-3.0",
         "AFL-3.0"
     ],
+    "require": {
+        "watts25/naranja-payment-sdk": "*"
+    },
     "autoload": {
         "files": [ 
             "registration.php" 
