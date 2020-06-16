@@ -13,8 +13,8 @@ class Environment implements \Magento\Framework\Option\ArrayInterface
     {
         $options = [
             ['value' => '', 'label' => __('-- Please Select --')],
-            ['value' => 'develop', 'label' => __('Develop')],
-            ['value' => 'production', 'label' => __('Production')]
+            ['value' => 'sandbox', 'label' => __('Sandbox')],
+            ['value' => 'prod', 'label' => __('Production')]
         ];
         return $options;
     }

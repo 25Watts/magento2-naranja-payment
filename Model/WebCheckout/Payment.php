@@ -176,7 +176,7 @@ class Payment extends AbstractMethod
             $transaction->setProducts($productItems);
 
             // Generamos el payment request
-            $paymentRequest = new \Naranja\CheckoutApi\Model\PaymentRequests();
+            $paymentRequest = new \Naranja\CheckoutApi\Model\PaymentRequest();
             $paymentRequest->setPaymentType('web_checkout');
             $paymentRequest->setAuthorizationMode('SALE');
             $paymentRequest->setExternalPaymentId($order->getIncrementId());
@@ -189,7 +189,8 @@ class Payment extends AbstractMethod
 
             // Agregamos el requests redirect al paymenRequests
             $paymentRequest->setRequestCreationRedirect($requestsCreationRedirect);
-            $paymentRequest->setCallbackUrl($this->_urlBuilder->getUrl('naranja/webcheckout/notification'));
+            // $paymentRequest->setCallbackUrl($this->_urlBuilder->getUrl('naranja/webcheckout/notification'));
+            $paymentRequest->setCallbackUrl('https://webhook.site/eebf626f-f34a-4aa2-813f-54fe95890904');
 
             // Ejecutamos el metodo
             $response = $this->_naranjaCheckout->createPaymentRequest($paymentRequest);
