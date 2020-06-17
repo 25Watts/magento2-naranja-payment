@@ -189,8 +189,7 @@ class Payment extends AbstractMethod
 
             // Agregamos el requests redirect al paymenRequests
             $paymentRequest->setRequestCreationRedirect($requestsCreationRedirect);
-            // $paymentRequest->setCallbackUrl($this->_urlBuilder->getUrl('naranja/webcheckout/notification'));
-            $paymentRequest->setCallbackUrl('https://webhook.site/eebf626f-f34a-4aa2-813f-54fe95890904');
+            $paymentRequest->setCallbackUrl($this->_urlBuilder->getUrl('naranja/webcheckout/notification'));
 
             // Ejecutamos el metodo
             $response = $this->_naranjaCheckout->createPaymentRequest($paymentRequest);

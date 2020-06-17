@@ -47,50 +47,64 @@ class Webcheckout extends NotificationBase
     public function execute()
     {
         $request = $this->getRequest();
-        
+
         try {
             $data = json_decode(file_get_contents('php://input'), true);
 
-            if (!empty($data['payment_id'])) {
-                $paymentId = $data['payment_id'];
-                $orderIncrementId = $data['external_payment_id'];
-                $order = $this->_orderFactory->create()->loadByIncrementId($orderIncrementId);
-                $payment = $this->_naranjaCheckout->getPayment($paymentId);
-
-                $this->_updatePaymentInfo($order, $payment);
-                
-                $this->_helper->log(
-                    sprintf(
-                        "Payment id: %s \\n %s",
-                        $paymentId,
-                        $payment->__toString()
-                    )
-                );
-
-                switch($data['status']) {
-                    case 'APPROVED':
-                        $message = __('Transacción aprobada automáticamente por Naranja');
-
-                        $order
-                            ->setState(Order::STATE_PROCESSING)
-                            ->setStatus(Order::STATE_PROCESSING)
-                            ->addStatusToHistory(Order::STATE_PROCESSING, $message)->save();
-
-                        $this->_createInvoice($order, $message);
-                    break;
-        
-                    case 'REJECTED':
-                        $message = __('Transacción denegada automáticamente por Naranja');
-
-                        $order
-                            ->setState(Order::STATE_PENDING_PAYMENT)
-                            ->setStatus(Order::STATE_PENDING_PAYMENT)
-                            ->addStatusToHistory(Order::STATE_PENDING_PAYMENT, $message)->save();
-                    break;
-                }
-
-                //$this->setResponseHttp(200, '');
+            if (empty($data['payment_id']) || empty($data['external_payment_id'])) {
+                throw new Exception(__('Error Payment notification is expected'), 400);
             }
+
+            $paymentId = $data['payment_id'];
+            $order = $this->_orderFactory->create()->loadByIncrementId($data['external_payment_id']);
+
+            if (empty($order) || empty($order->getId())) {
+                throw new Exception(__('Error Order Not Found in Magento: ') . $data['external_reference'], 400);
+            }
+
+            if ($order->getState() == Order::STATE_CANCELED) {
+                throw new Exception(__('Order already canceled: ') . $data["external_reference"], 400);
+            }
+
+            $payment = $this->_naranjaCheckout->getPayment($paymentId);
+
+            if (empty($payment)) {
+                throw new Exception(__('Error Payment not found in Naranja'), 400);
+            }
+
+            $this->_updatePaymentInfo($order, $payment);
+
+            $this->_helper->log(
+                sprintf(
+                    "Payment id: %s \\n %s",
+                    $paymentId,
+                    $payment->__toString()
+                )
+            );
+
+            switch ($data['status']) {
+                case 'APPROVED':
+                    $message = __('Transaction automatically approved by Naranja');
+
+                    $order
+                        ->setState(Order::STATE_PROCESSING)
+                        ->setStatus(Order::STATE_PROCESSING)
+                        ->addStatusToHistory(Order::STATE_PROCESSING, $message)->save();
+
+                    $this->_createInvoice($order, $message);
+                    break;
+
+                case 'REJECTED':
+                    $message = __('Transaction automatically denied by Naranja');
+
+                    $order
+                        ->setState(Order::STATE_PENDING_PAYMENT)
+                        ->setStatus(Order::STATE_PENDING_PAYMENT)
+                        ->addStatusToHistory(Order::STATE_PENDING_PAYMENT, $message)->save();
+                    break;
+            }
+
+            //$this->setResponseHttp(200, '');
         } catch (Exception $e) {
             $this->setResponseHttp($e->getCode(), $e->getMessage(), $request->getParams());
         }
@@ -130,13 +144,18 @@ class Webcheckout extends NotificationBase
             'id',
             'payment_type',
             'status',
-            'external_payment_id'
+            'external_payment_id',
+            'date_created'
         ];
 
         foreach ($additionalFields as $field) {
             if (isset($data[$field])) {
                 $paymentOrder->setAdditionalInformation($field, $data[$field]);
             }
+        }
+
+        if (isset($data['transactions'][0]['installments_plan']['installments'])) {
+            $paymentOrder->setAdditionalInformation('installments', $data['transactions'][0]['installments_plan']['installments']);
         }
 
         $paymentOrder->save();

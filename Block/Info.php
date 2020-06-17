@@ -42,21 +42,31 @@ class Info extends \Magento\Payment\Block\Info
         $data = [];
 
         $info = $this->getInfo();
-        $paymentResponse = $info->getAdditionalInformation("paymentResponse");
+        $paymentResponse = $info->getAdditionalInformation();
+
+        if (isset($paymentResponse['status'])) {
+            $title = __('Payment Status');
+            $data[$title->__toString()] = ucfirst($paymentResponse['status']);
+        }
+
+        if (isset($paymentResponse['date_created'])) {
+            $title = __('Created at');
+            $data[$title->__toString()] = ucfirst($paymentResponse['date_created']);
+        }
 
         if (isset($paymentResponse['id'])) {
             $title = __('Payment id');
             $data[$title->__toString()] = $paymentResponse['id'];
         }
 
-        if (isset($paymentResponse['card'])) {
-            $title = __('Card Number');
-            $data[$title->__toString()] = $paymentResponse['card'];
+        if (isset($paymentResponse['payment_type'])) {
+            $title = __('Payment type');
+            $data[$title->__toString()] = $paymentResponse['payment_type'];
         }
 
-        if (isset($paymentResponse['status'])) {
-            $title = __('Payment Status');
-            $data[$title->__toString()] = ucfirst($paymentResponse['status']);
+        if (isset($paymentResponse['installments'])) {
+            $title = __('Installments');
+            $data[$title->__toString()] = $paymentResponse['installments'];
         }
 
         return $transport->setData(array_merge($data, $transport->getData()));
