@@ -108,7 +108,7 @@ class NaranjaCheckout
         }
     }
 
-    function getPaymentRequests($id)
+    function getPaymentRequest($id)
     {
         $token = $this->getToken();
         $apiCheckoutSdk = $this->getInstanceApiCheckout($token);
@@ -117,6 +117,18 @@ class NaranjaCheckout
             return $result;
         } catch (Exception $e) {
             echo 'Exception when calling NaranjaCheckout->getPaymentRequests: ', $e->getMessage(), PHP_EOL;
+        }
+    }
+
+    function getPayment($id)
+    {
+        $token = $this->getToken();
+        $apiCheckoutSdk = $this->getInstanceApiCheckout($token);
+        try {
+            $result = $apiCheckoutSdk->getPayment($id);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Exception when calling OwnerDxApi->getPayment: ', $e->getMessage(), PHP_EOL;
         }
     }
 }

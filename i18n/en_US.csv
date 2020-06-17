@@ -1,0 +1,30 @@
+"Payment Status","Payment Status"
+"Created at","Created at"
+"Payment id","Payment id"
+"Payment type","Payment type"
+Installments,Installments
+"Error Payment notification is expected","Error Payment notification is expected"
+"Error Order Not Found in Magento: ","Error Order Not Found in Magento: "
+"Order already canceled: ","Order already canceled: "
+"Error Payment not found in Naranja","Error Payment not found in Naranja"
+"Transaction automatically approved by Naranja","Transaction automatically approved by Naranja"
+"Transaction automatically denied by Naranja","Transaction automatically denied by Naranja"
+"-- Please Select --","-- Please Select --"
+Sandbox,Sandbox
+Production,Production
+"Payment model does not provided.","Payment model does not provided."
+Naranja,Naranja
+Advanced,Advanced
+Environment,Environment
+"Log to File","Log to File"
+Credentials,Credentials
+"Client Id","Client Id"
+"Access Token","Access Token"
+General,General
+Enabled,Enabled
+Title,Title
+"New Order Status","New Order Status"
+"Payment from Applicable Countries","Payment from Applicable Countries"
+"Payment from Specific Countries","Payment from Specific Countries"
+Instructions,Instructions
+"Sort Order","Sort Order"

@@ -176,7 +176,7 @@ class Payment extends AbstractMethod
             $transaction->setProducts($productItems);
 
             // Generamos el payment request
-            $paymentRequest = new \Naranja\CheckoutApi\Model\PaymentRequests();
+            $paymentRequest = new \Naranja\CheckoutApi\Model\PaymentRequest();
             $paymentRequest->setPaymentType('web_checkout');
             $paymentRequest->setAuthorizationMode('SALE');
             $paymentRequest->setExternalPaymentId($order->getIncrementId());
