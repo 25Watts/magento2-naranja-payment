@@ -8,7 +8,7 @@
         "AFL-3.0"
     ],
     "require": {
-        "watts25/naranja-payment-sdk": "*"
+        "watts25/naranja-payment-sdk": "^0.1.1"
     },
     "autoload": {
         "files": [ 
