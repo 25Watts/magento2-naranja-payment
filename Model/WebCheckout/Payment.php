@@ -119,7 +119,6 @@ class Payment extends AbstractMethod
             $orderId = $this->_checkoutSession->getLastRealOrderId();
             $order = $this->_orderFactory->create()->loadByIncrementId($orderId);
             $customer = $this->_customerSession->getCustomer();
-            // $infoInstance = $this->getInfoInstance();
             $productItems = [];
 
             // Definimos el objeto transaccion
@@ -194,9 +193,6 @@ class Payment extends AbstractMethod
             // Ejecutamos el metodo
             $response = $this->_naranjaCheckout->createPaymentRequest($paymentRequest);
             $response = json_decode($response,true);
-
-            // add additionalInformation
-            // $infoInstance->setAdditionalInformation($response);
 
             return $response;
         } catch (Exception $e){
