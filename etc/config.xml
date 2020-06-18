@@ -10,6 +10,10 @@
                 <payment_action>authorize</payment_action>
                 <model>Watts25\Naranja\Model\WebCheckout\Payment</model>
                 <group>offline</group>
+                <advanced>
+                    <environment>sandbox</environment>
+                    <logs>0</logs>
+                </advanced>
             </naranja_webcheckout>
         </payment>
     </default>
