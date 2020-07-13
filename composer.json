@@ -2,13 +2,13 @@
     "name": "watts25/magento2-naranja-payment",
     "description": "Naranja payment method module",
     "type": "magento2-module",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
     ],
     "require": {
-        "watts25/naranja-payment-sdk": "^0.1.1"
+        "watts25/naranja-payment-sdk": "^0.1.2"
     },
     "autoload": {
         "files": [ 
