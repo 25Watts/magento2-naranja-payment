@@ -14,7 +14,8 @@ class Environment implements \Magento\Framework\Option\ArrayInterface
         $options = [
             ['value' => '', 'label' => __('-- Please Select --')],
             ['value' => 'sandbox', 'label' => __('Sandbox')],
-            ['value' => 'prod', 'label' => __('Production')]
+            ['value' => 'staging', 'label' => __('Staging')],
+            ['value' => 'production', 'label' => __('Production')]
         ];
         return $options;
     }
