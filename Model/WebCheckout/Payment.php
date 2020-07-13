@@ -171,6 +171,24 @@ class Payment extends AbstractMethod
 
             $productItems[] = $shippingItem;
 
+            // add discount item
+            if ($order->getDiscountAmount()) {
+                $discountItem = new \Naranja\CheckoutApi\Model\ProductItem();
+                $discountItem->setName($order->getDiscountDescription());
+                //$shippingItem->setDescription('Granja del sol');
+                $discountItem->setQuantity(1);
+    
+                // Set unit_price
+                $unitPrice = new \Naranja\CheckoutApi\Model\Amount();
+                $unitPrice->setCurrency('ARS');
+                $unitPrice->setValue((string)number_format($order->getDiscountAmount(), 2, '.', ''));
+    
+                // Add el unitPrice to product
+                $discountItem->setUnitPrice($unitPrice);
+    
+                $productItems[] = $discountItem;
+            }
+
             // add product to transaction
             $transaction->setProducts($productItems);
 
