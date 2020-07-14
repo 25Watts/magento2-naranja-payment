@@ -103,10 +103,8 @@ class Webcheckout extends NotificationBase
                         ->addStatusToHistory(Order::STATE_PENDING_PAYMENT, $message)->save();
                     break;
             }
-
-            //$this->setResponseHttp(200, '');
         } catch (Exception $e) {
-            $this->setResponseHttp($e->getCode(), $e->getMessage(), $request->getParams());
+            $this->setResponseHttp(500, $e->getMessage(), $request->getParams());
         }
     }
 
