@@ -2,4 +2,7 @@
     <!-- <event name="payment_method_assign_data_naranja_webcheckout">
         <observer name="watts25_naranja_gateway_data_assign" instance="Watts25\Naranja\Observer\DataAssignObserver" />
     </event> -->
+    <event name="payment_method_is_active">
+        <observer name="watts25_naranja_payment_enabled_by_customer_group" instance="Watts25\Naranja\Observer\EnabledPaymentByCustomerGroup" />
+    </event>
 </config>

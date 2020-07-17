@@ -4,7 +4,7 @@
         <payment>
             <naranja_webcheckout>
                 <active>1</active>
-                <title>Naranja</title>
+                <title>Pagar con Naranja</title>
                 <order_status>pending_payment</order_status>
                 <instructions></instructions>
                 <payment_action>authorize</payment_action>

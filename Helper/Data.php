@@ -54,4 +54,11 @@ extends \Magento\Payment\Helper\Data
         $this->_logger->setName($name);
         $this->_logger->debug($message);
     }
+
+    public function getEnabledCustomerGroup()
+    {
+        $customerGroup = $this->scopeConfig->getValue(\Watts25\Naranja\Helper\ConfigData::ENABLED_CUSTOMER_GROUP, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+
+        return $customerGroup;
+    }
 }
