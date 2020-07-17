@@ -9,4 +9,5 @@ extends \Magento\Payment\Helper\Data
     const CLIENT_ID = 'payment/naranja_webcheckout/client_id';
     const CLIENT_SECRET = 'payment/naranja_webcheckout/client_secret';
     const ENVIRONMENT = 'payment/naranja_webcheckout/environment';
+    const ENABLED_CUSTOMER_GROUP = 'payment/naranja_webcheckout/enabled_customer_group';
 }

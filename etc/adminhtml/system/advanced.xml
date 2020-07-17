@@ -15,5 +15,11 @@
             <config_path>payment/naranja_webcheckout/logs</config_path>
         </field>
 
+        <field id="enabled_customer_group" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Enabled for Customer Group</label>
+            <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+            <config_path>payment/naranja_webcheckout/enabled_customer_group</config_path>
+        </field>
+
     </group>
 </include>
