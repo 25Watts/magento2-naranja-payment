@@ -94,7 +94,7 @@ class Webcheckout extends NotificationBase
                     $this->_createInvoice($order, $message);
                     break;
 
-                case 'REJECTED':
+                default:
                     $message = __('Transaction automatically denied by Naranja');
 
                     $order
