@@ -81,15 +81,20 @@ class Pay extends Action implements ViewInterface
      */
     public function execute()
     {
+        $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            
         try {
             $paymentRequest = $this->_paymentFactory->createPaymentRequest();
-            $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
-    
+
             $resultRedirect->setUrl($paymentRequest['checkout_url']);
 
             return $resultRedirect;
         } catch (Exception $e) {
             $this->_helper->log("ERROR CONTROLLER WEBCHECKOUT PAY: " . $e->getMessage(), self::LOG_NAME);
+
+            $resultRedirect->setUrl($this->_url->getUrl(\Watts25\Naranja\Model\WebCheckout\Payment::CHECKOUT_FAILURE_URL));
+
+            return $resultRedirect;
         }
     }
 }
