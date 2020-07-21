@@ -196,6 +196,8 @@ class Payment extends AbstractMethod
 
             return $response;
         } catch (Exception $e){
+            $this->_helper->log("ERROR CREATEPAYMENTREQUEST: " . $e->getMessage());
+
             return [];
         }
 
